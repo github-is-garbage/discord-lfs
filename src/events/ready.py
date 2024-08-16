@@ -1,12 +1,13 @@
 from bot import Bot
 import discord
+import os
 
 @Bot.event
 async def on_ready():
 	print("Connected to Discord")
 
 	print("Syncing commands")
-	TestServer = discord.Object(642793766188744715) # TODO: Make it not this
+	TestServer = discord.Object(int(os.environ.get("GUILD_ID"))) # TODO: Make this better?
 
 	Bot.tree.copy_global_to(guild = TestServer)
 	await Bot.tree.sync(guild = TestServer)
