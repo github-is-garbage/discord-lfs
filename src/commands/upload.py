@@ -4,13 +4,8 @@ from pathlib import Path
 
 from image_helper import ProcessFileContent
 
-from temphelp import canthing
-
 @Bot.tree.command(name = "upload")
 async def upload(interaction: discord.Interaction, path: str, channel: discord.TextChannel = None):
-	if not canthing(interaction): # TODO: Remove this
-		return await interaction.response.send_message("No")
-
 	FilePath = Path(path)
 
 	if not FilePath.is_file():
