@@ -15,11 +15,11 @@ def BinaryToImage(Binary: str):
 
 	Rows = math.ceil(Length / PIXELS_PER_ROW)
 
-	Constructed = Image.new("RGB", (PIXELS_PER_ROW, Rows), "#FFFFFF")
+	Constructed = Image.new("RGB", (PIXELS_PER_ROW, Rows), (255, 0, 0))
 
 	for Row in range(0, Rows):
 		for Pixel in range(0, PIXELS_PER_ROW):
-			Index = ((Row - 1) * PIXELS_PER_ROW) + Pixel
+			Index = (Row * PIXELS_PER_ROW) + Pixel
 
 			if Index >= Length:
 				break # Hit the end
