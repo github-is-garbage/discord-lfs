@@ -10,8 +10,9 @@ Not an original idea. I saw [this](https://www.youtube.com/watch?v=eOuephDbkJQ) 
 
 ## Setup
 
-1. Create a `.env` file in the `src` folder
-2. Add the line `BOT_TOKEN=(your bot token here)` to the `.env`
-3. Add the line `GUILD_ID=(your guild ID here)` to the `.env`
-4. `python3 main.py`
-5. Profit (Use the bot's slash commands)
+1. `pip install -r requirements.txt`
+2. Create a `.env` file in the `src` folder
+3. Add the line `BOT_TOKEN=(your bot token here)` to the `.env`
+4. Add the line `GUILD_ID=(your guild ID here)` to the `.env`
+5. `python3 src/main.py`
+6. Profit (Use the bot's slash commands)
