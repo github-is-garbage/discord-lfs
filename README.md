@@ -1,6 +1,6 @@
 # DiscordLFS
 
-Encodes files into binary string data which is then encoded into `.png` images where black pixels are 1's and white pixels are 0's.\
+Encodes files into binary string data which is then encoded into `.png` images where black pixels are 1's and white pixels are 0's.
 These images are then uploaded to Discord one by one to allow essentially unlimited file storage as long as the message chunks remain.
 
 Not an original idea. I saw [this](https://www.youtube.com/watch?v=eOuephDbkJQ) video and wanted to recreate it for myself :]
