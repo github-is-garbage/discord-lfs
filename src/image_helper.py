@@ -40,10 +40,11 @@ async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, C
 		return await Interaction.edit_original_response(content = "Failed to convert to binary data")
 
 	BinaryChunks = SplitBinaryData(Binary)
+	ChunkCount = len(BinaryChunks)
 	TotalSize = 0
 
 	# Turn binary string into a pretty picture
-	await Interaction.edit_original_response(content = f"Constructing...\n(May take a while)\n\nChunk Count: `{len(BinaryChunks)}`")
+	await Interaction.edit_original_response(content = f"Constructing...\n(May take a while)\n\nChunk Count: `{ChunkCount}`")
 
 	InitialMessage = None
 
@@ -65,7 +66,7 @@ async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, C
 		# print(f"Uploading chunk #{i}")
 
 		if InitialMessage is None:
-			InitialMessage = await Channel.send(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`", file = File)
+			InitialMessage = await Channel.send(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`\nChunk Count: `{ChunkCount}`", file = File)
 		else:
 			# The "Reference" and "Chunk Number" will be used in the download step
 			await Channel.send(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`\nReference: `{InitialMessage.id}`\nChunk Number: `{i}`", file = File)
