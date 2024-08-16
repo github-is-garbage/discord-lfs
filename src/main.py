@@ -7,4 +7,8 @@ from bot import Bot
 
 import mobile
 
+from folder_loader import LoadFromFolder
+
+LoadFromFolder("events")
+
 Bot.run(os.environ.get("BOT_TOKEN"))
