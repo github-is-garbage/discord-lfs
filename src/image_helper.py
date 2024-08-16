@@ -29,7 +29,7 @@ def BinaryToImage(Binary: str):
 
 	return Constructed
 
-async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, Content: str):
+async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, Content: str, Channel: discord.TextChannel):
 	Binary = StringToBinary(Content)
 
 	if len(Binary) < 1:
@@ -42,7 +42,16 @@ async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, C
 	Buffer.seek(0)
 
 	File = discord.File(Buffer, "constructed.png")
-	await Interaction.response.send_message(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`", file = File)
+
+	ChannelMessage = await Channel.send(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`", file = File)
+
+	MessageGuildID = ChannelMessage.guild.id
+	MessageChannelID = Channel.id
+	MessageID = ChannelMessage.id
+
+	MessageLink = f"https://discord.com/channels/{MessageGuildID}/{MessageChannelID}/{MessageID}"
+
+	await Interaction.response.send_message(f"Uploaded [here]({MessageLink})")
 
 	Buffer.close()
 	ConstructedImage.close()

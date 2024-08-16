@@ -7,7 +7,7 @@ from image_helper import ProcessFileContent
 from temphelp import canthing
 
 @Bot.tree.command(name = "upload")
-async def upload(interaction: discord.Interaction, path: str):
+async def upload(interaction: discord.Interaction, path: str, channel: discord.TextChannel = None):
 	if not canthing(interaction): # TODO: Remove this
 		return await interaction.response.send_message("No")
 
@@ -23,8 +23,10 @@ async def upload(interaction: discord.Interaction, path: str):
 	if len(Content) < 1:
 		return await interaction.response.send_message("File is empty!")
 
+	Channel = channel if channel is not None else interaction.channel
+
 	try:
-		await ProcessFileContent(interaction, FilePath, Content)
+		await ProcessFileContent(interaction, FilePath, Content, Channel)
 	except Exception as Error:
 		print(Error)
 
