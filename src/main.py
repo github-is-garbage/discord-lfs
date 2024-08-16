@@ -9,6 +9,7 @@ import mobile
 
 from folder_loader import LoadFromFolder
 
+LoadFromFolder("commands")
 LoadFromFolder("events")
 
 Bot.run(os.environ.get("BOT_TOKEN"))
