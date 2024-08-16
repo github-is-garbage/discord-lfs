@@ -7,7 +7,7 @@ from PIL import Image
 PIXELS_PER_ROW = 1000
 
 def StringToBinary(String: str):
-	return "".join(format(ord(i), "08b") for i in String)
+	return "".join(format(i, "08b") for i in String)
 
 def BinaryToImage(Binary: str):
 	Length = len(Binary)

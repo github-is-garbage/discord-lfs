@@ -16,7 +16,7 @@ async def upload(interaction: discord.Interaction, path: str, channel: discord.T
 	if not FilePath.is_file():
 		return await interaction.response.send_message("File does not exist!")
 
-	File = open(path, "r")
+	File = open(path, "rb")
 	Content = File.read()
 	File.close()
 
