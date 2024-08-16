@@ -1,6 +1,7 @@
 import discord
 import math
 import io
+from pathlib import Path
 from PIL import Image
 
 PIXELS_PER_ROW = 1000
@@ -28,7 +29,7 @@ def BinaryToImage(Binary: str):
 
 	return Constructed
 
-async def ProcessFileContent(Interaction: discord.Interaction, FileName: str, Content: str):
+async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, Content: str):
 	Binary = StringToBinary(Content)
 
 	if len(Binary) < 1:
@@ -41,7 +42,7 @@ async def ProcessFileContent(Interaction: discord.Interaction, FileName: str, Co
 	Buffer.seek(0)
 
 	File = discord.File(Buffer, "constructed.png")
-	await Interaction.response.send_message(FileName, file = File)
+	await Interaction.response.send_message(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`", file = File)
 
 	Buffer.close()
 	ConstructedImage.close()

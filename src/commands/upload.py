@@ -24,7 +24,7 @@ async def upload(interaction: discord.Interaction, path: str):
 		return await interaction.response.send_message("File is empty!")
 
 	try:
-		await ProcessFileContent(interaction, FilePath.name, Content)
+		await ProcessFileContent(interaction, FilePath, Content)
 	except Exception as Error:
 		print(Error)
 
