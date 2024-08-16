@@ -26,8 +26,10 @@ async def upload(interaction: discord.Interaction, path: str, channel: discord.T
 	Channel = channel if channel is not None else interaction.channel
 
 	try:
+		await interaction.response.send_message("Starting processing...")
+
 		await ProcessFileContent(interaction, FilePath, Content, Channel)
 	except Exception as Error:
 		print(Error)
 
-		await interaction.response.send_message("Failed for some reason (Check bot console)")
+		await interaction.edit_original_response(content = "Failed for some reason (Check bot console)")

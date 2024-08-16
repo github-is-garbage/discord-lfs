@@ -33,25 +33,35 @@ async def ProcessFileContent(Interaction: discord.Interaction, FilePath: Path, C
 	Binary = StringToBinary(Content)
 
 	if len(Binary) < 1:
-		return await Interaction.response.send_message("Failed to convert to binary data")
+		return await Interaction.edit_original_response(content = "Failed to convert to binary data")
 
+	# Turn binary string into a pretty picture
+	await Interaction.edit_original_response(content = "Constructing image...\n(May take a while)")
 	ConstructedImage = BinaryToImage(Binary)
+
+	# Plop it into a memory buffer
+	await Interaction.edit_original_response(content = "Saving image to buffer...")
 
 	Buffer = io.BytesIO()
 	ConstructedImage.save(Buffer, "PNG")
+
+	BufferSize = Buffer.getbuffer().nbytes
 	Buffer.seek(0)
 
+	# Upload to Discord
 	File = discord.File(Buffer, "constructed.png")
 
+	await Interaction.edit_original_response(content = f"Uploading image...\nTotal size: {BufferSize} bytes")
 	ChannelMessage = await Channel.send(f"Filename: `{FilePath.name}`\nPath: `{FilePath.resolve()}`", file = File)
 
+	# Respond with link to upload message
 	MessageGuildID = ChannelMessage.guild.id
 	MessageChannelID = Channel.id
 	MessageID = ChannelMessage.id
 
 	MessageLink = f"https://discord.com/channels/{MessageGuildID}/{MessageChannelID}/{MessageID}"
 
-	await Interaction.response.send_message(f"Uploaded [here]({MessageLink})")
+	await Interaction.edit_original_response(content = f"Uploaded [here]({MessageLink})\nTotal size: {BufferSize} bytes")
 
 	Buffer.close()
 	ConstructedImage.close()
