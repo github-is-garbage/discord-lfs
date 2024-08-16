@@ -1,13 +1,10 @@
-import os
 from dotenv import load_dotenv, find_dotenv
 
-dotenv_location = find_dotenv()
+load_dotenv(find_dotenv())
 
-if len(dotenv_location) > 0:
-	load_dotenv(dotenv_location)
+import os
+from bot import bot
 
-	BOT_TOKEN = os.environ.get("BOT_TOKEN")
+import mobile
 
-	print(BOT_TOKEN)
-else:
-	print("Can't find .env - Aborting")
+bot.run(os.environ.get("BOT_TOKEN"))
