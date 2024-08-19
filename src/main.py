@@ -5,8 +5,6 @@ load_dotenv(find_dotenv())
 import os
 from bot import Bot
 
-import mobile
-
 from folder_loader import LoadFromFolder
 
 LoadFromFolder("commands")
